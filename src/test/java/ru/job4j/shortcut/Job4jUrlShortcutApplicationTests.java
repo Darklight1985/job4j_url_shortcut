@@ -1,4 +1,4 @@
-package com.example.job4j_url_shortcut;
+package ru.job4j.shortcut;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
