@@ -12,6 +12,9 @@ public class User {
     private String username;
     private String password;
 
+    public User() {
+    }
+
     public static User of(String username, String password) {
         User user = new User();
         user.username = username;

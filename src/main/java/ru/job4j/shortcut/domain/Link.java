@@ -10,17 +10,31 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String url;
+    private String uri;
+
+    private String code;
+
+    private int count;
 
     @ManyToOne
     @JoinColumn(name = "resource_id")
     private Resource resource;
 
-    public  static  Link of(String url, Resource resource) {
+    public  static  Link of(String url, String code, Resource resource) {
         Link link = new Link();
-        link.url = url;
+        link.uri = url;
+        link.code = code;
         link.resource = resource;
+        link.count = 0;
         return link;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void incrCount() {
+        this.count++;
     }
 
     public int getId() {
@@ -31,12 +45,12 @@ public class Link {
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUri() {
+        return uri;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrl(String uri) {
+        this.uri = uri;
     }
 
     public Resource getResource() {
@@ -45,6 +59,14 @@ public class Link {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override
@@ -56,20 +78,21 @@ public class Link {
             return false;
         }
         Link link = (Link) o;
-        return Objects.equals(url, link.url) && Objects.equals(resource, link.resource);
+        return count == link.count && Objects.equals(uri, link.uri)
+                && Objects.equals(code, link.code) && Objects.equals(resource, link.resource);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, resource);
+        return Objects.hash(uri, code, count, resource);
     }
 
     @Override
     public String toString() {
         return "Link{"
                 + "id=" + id
-                + ", url='" + url + '\''
-                + ", resource=" + resource
+                + ", url='" + uri + '\''
+                + ", code='" + code + '\''
                 + '}';
     }
 }

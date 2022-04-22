@@ -1,7 +1,7 @@
 create table if not exists users (
   id serial primary key not null,
   username varchar(50),
-  password varchar(50)
+  password text
 );
 
 create table if not exists resource (
@@ -12,6 +12,8 @@ create table if not exists resource (
 
 create table if not exists link (
  id serial primary key not null,
-url varchar(150),
+uri varchar(150),
+code text,
+count int,
 resource_id int references resource(id)
 );

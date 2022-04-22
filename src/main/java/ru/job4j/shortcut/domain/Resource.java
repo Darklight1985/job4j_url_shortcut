@@ -13,12 +13,9 @@ public class Resource {
     private int id;
     private String site;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Link> links = new ArrayList<>();
 
     public static Resource of(String site, User user) {
         Resource resource = new Resource();
@@ -51,18 +48,6 @@ public class Resource {
         this.user = user;
     }
 
-    public List<Link> getLinks() {
-        return links;
-    }
-
-    public void setLinks(List<Link> links) {
-        this.links = links;
-    }
-
-    public void addLink(Link link) {
-        this.links.add(link);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -86,7 +71,6 @@ public class Resource {
                 + "id=" + id
                 + ", site='" + site + '\''
                 + ", user=" + user
-                + ", links=" + links
                 + '}';
     }
 }
