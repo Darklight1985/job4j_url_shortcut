@@ -33,10 +33,6 @@ public class Link {
         return count;
     }
 
-    public void incrCount() {
-        this.count++;
-    }
-
     public int getId() {
         return id;
     }

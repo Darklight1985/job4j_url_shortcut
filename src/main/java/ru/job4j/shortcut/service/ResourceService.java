@@ -71,8 +71,7 @@ public class ResourceService {
 
     public ResponseEntity<Object> redirect(String code) {
         var link = linkRepository.findByCode(code);
-        link.get().incrCount();
-        linkRepository.save(link.get());
+        linkRepository.incrCount(link.get().getCount(), link.get().getId());
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(link.get().getUri())).build();
     }
